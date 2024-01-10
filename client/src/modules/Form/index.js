@@ -7,14 +7,16 @@ import { useNavigate } from 'react-router-dom'
 const Form = ({
     isSignInPage = true,
 }) => {
+
+
   const [data, setData] = useState({
         ...(!isSignInPage && {
             fullName: '',
-        //       email: '',
-        // password: ''
-        }),
-        email: '',
+              email: '',
         password: ''
+        }),
+        // email: '',
+        // password: ''
     })
 
   const navigate = useNavigate()
@@ -29,6 +31,10 @@ const Form = ({
             body: JSON.stringify(data)
         })
 
+        if(!isSignInPage)
+        { 
+            navigate(`/users/sign_in}`)
+        }
         if(res.status === 400) {
             alert('Invalid credentials')
         }else{

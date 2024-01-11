@@ -4,21 +4,44 @@ import Input from "../../components/Input/input";
 import { useEffect, useRef, useState } from 'react'
 import {io} from 'socket.io-client'
 import { useNavigate } from 'react-router-dom'
+import UserProfile from "./Components/userprofile";
 
 const Dashboard=()=>{
 
-    const [user, setUser] = useState(JSON.parse(localStorage.getItem('user:detail')))
+    // gets information of user from local storage 
+	const [user, setUser] = useState(JSON.parse(localStorage.getItem('user:detail')))
+
+	// Used to get conversations
 	const [conversations, setConversations] = useState([])
+
+	// Used to get messages of the user	
     const [messages, setMessages] = useState({})
+
+	// Used to set the current message when the user is typing 
     const [message, setMessage] = useState('')
+
+	// obtains users
     const [users, setUsers] = useState([])
+
+	// Initalizes socket.io
 	const [socket, setSocket] = useState(null)
+
+	
     const messageRef = useRef(null)
+
+	// for Navigation
 	const navigate = useNavigate()
+
+	// checks to see if user is already logged in
 	const [token, setToken] = useState(localStorage.getItem('user:token'))
+
+	// Used to set search term when we are checking for user
 	const [searchTerm, setSearchTerm] = useState('')
+
+	// filters the user we are searching for accotrding to the words we have entered
 	const filteredUsers = users.filter(({ user }) =>
     user?.fullName.toLowerCase().includes(searchTerm.toLowerCase())
+
   );
 	
 useEffect(() => {
@@ -30,7 +53,20 @@ useEffect(() => {
 		socket?.on('getUsers', users => {
 			console.log('activeUsers :>> ', users);
 		})
+
 		socket?.on('getMessage', data => {
+			// Here, setMessages is a function that updates the state of some component, 
+		// particularly the messages property within that state. 
+		// The function takes the previous state (prev) as an argument and returns a new state object.
+		// ...prev: This spread operator is used to create a shallow copy of the previous state. 
+		// It ensures that other properties in the state are retained.
+		// messages: [...prev.messages, { user: data.user, message: data.message }]: 
+		// This updates the messages property in the state. 
+		// It creates a new array by spreading the elements of the previous messages array (...prev.messages) 
+		// and adds a new object at the end. 
+		// 	This new object has user and message properties, 
+		// and their values come from the data object (presumably passed as an argument).
+
 			setMessages(prev => ({
 				...prev,
 				messages: [...prev.messages, { user: data.user, message: data.message }]
@@ -38,6 +74,8 @@ useEffect(() => {
 		})
 	}, [socket])
 
+
+	// If the state of messages changes then we scroll into view to see the latest message
     useEffect(() => {
 		messageRef?.current?.scrollIntoView({ behavior: 'smooth' })
 	}, [messages?.messages])
@@ -45,7 +83,10 @@ useEffect(() => {
 
 	
     useEffect(() => {
+		// checks to see if user is logged in
 		const loggedInUser = JSON.parse(localStorage.getItem('user:detail'))
+
+		// send a request to the api which gets conversations
 		const fetchConversations = async () => {
 			const res = await fetch(`http://localhost:8000/api/conversations/${loggedInUser?.id}`, {
 				method: 'GET',
@@ -60,6 +101,8 @@ useEffect(() => {
 	}, [])
 
     const fetchMessages = async (conversationId, receiver) => {
+
+		// send a request to the api which gets messages
 		const res = await fetch(`http://localhost:8000/api/message/${conversationId}?senderId=${user?.id}&&receiverId=${receiver?.receiverId}`, {
 			method: 'GET',
 			headers: {
@@ -84,6 +127,8 @@ useEffect(() => {
 		fetchUsers()
 	}, [])
 
+
+	// logs out user by clearing the token stored in the local storage
 	const LogoutUser =  () => {
 		console.log('Logged out user');
 		setToken('');
@@ -123,13 +168,7 @@ useEffect(() => {
     return(
         <div className="w-screen flex">
             <div className='w-1/4  h-screen bg-secondary overflow-scroll'>
-            <div className='flex items-center my-8 mx-14'>
-					<div><img src={Avatar} width={75} height={75} className='border border-primary p-[2px] rounded-full' /></div>
-					<div className='ml-8'>
-						<h3 className='text-2xl'>{user?.fullName}</h3>
-						<p className='text-lg font-light'>My Account</p>
-					</div>
-				</div>
+            <UserProfile user={user}/>
 				<hr />
 				<div className='mx-14 mt-10'>
 					<div className='text-primary text-lg'>Messages</div>
@@ -210,8 +249,8 @@ useEffect(() => {
 				}
             </div>
             <div className='w-1/4 h-screen px-8 py-8 bg-light overflow-scroll'>
-			<button type="button" class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-3 text-center me-2 mb-2 dark:border-blue-400 dark:text-blue-400 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-900" onClick={LogoutUser}>Log Out</button>
-            <div className='text-primary text-lg'>Search Users</div>
+			<button type="button" class="text-black hover:text-white border border-black hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-3 text-center me-2 mb-2 dark:border-blue-400 dark:text-blue-400 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-900" onClick={LogoutUser}>Log Out</button>
+            <div className='text-black text-lg'>Search Users</div>
           <input
             type='text'
             placeholder='Search by Name...'

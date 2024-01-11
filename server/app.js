@@ -1,7 +1,14 @@
-const express =require('express');
+const express = require('express');
+// const { getmessages } = require('./API_calls/get_message');
+// const { getconversation } = require('./API_calls/get_conversations');
+// const { getusers } = require('./API_calls/get_users');
+// const { login } = require('./API_calls/login');
+// const { register } = require('./API_calls/register');
+// const { sendmessage } = require('./API_calls/send_message');
+// const { createconversation } = require('./API_calls/create_conversation');
+const cors = require('cors');
 const bcryptjs = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const cors = require('cors');
 const io = require('socket.io')(8080, {
     cors: {
         origin: 'http://localhost:3000',
@@ -10,19 +17,29 @@ const io = require('socket.io')(8080, {
 const app= express();
 
 // Connect DB
-require('./db/connection');``
+require('./db/connection');
 
 
 // Import Files
-const Users=require('./Models/Users');
-const Conversations = require('./Models/Conversations');
-const Messages = require('./Models/Messages');
+const { Users } = require('./Models/Users');
+const { Conversations } = require('./Models/Conversations');
+const { Messages } = require('./Models/Messages');
+
 
 
 const port=process.env.PORT || 8000
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(cors());
+// app.use(getconversation);
+// app.use(getmessages);
+// app.use(getusers);
+// app.use(createconversation);
+// app.use(login);
+// app.use(register);
+// app.use(sendmessage);
+
+
 
 app.get('/', (req, res) => {
     res.send('Hello World');

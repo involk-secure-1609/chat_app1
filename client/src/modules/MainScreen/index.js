@@ -4,8 +4,9 @@ import Input from "../../components/Input/input";
 import { useEffect, useRef, useState } from 'react'
 import {io} from 'socket.io-client'
 import { useNavigate } from 'react-router-dom'
-import UserProfile from "./Components/userprofile";
-
+import UserProfile from "./ChatNames/userprofile";
+import ConversationItem from "./ChatNames/chatprofile";
+import MessageHeader from "./MessageComps/MessageHeader";
 const Dashboard=()=>{
 
     // gets information of user from local storage 
@@ -176,18 +177,10 @@ useEffect(() => {
 						{
 							conversations.length > 0 ?
 								conversations.map(({ conversationId, user }) => {
-									return (
-										<div className='flex items-center py-8 border-b border-b-gray-300'>
-											<div className='cursor-pointer flex items-center' onClick={() => fetchMessages(conversationId, user)}>
-												<div><img src={Avatar} className="w-[60px] h-[60px] rounded-full p-[2px] border border-primary" /></div>
-												<div className='ml-6'>
-													<h3 className='text-lg font-semibold'>{user?.fullName}</h3>
-													<p className='text-sm font-light text-gray-600'>{user?.email}</p>
-												</div>
-											</div>
-										</div>
-									)
-								}) : <div className='text-center text-lg font-semibold mt-24'>No Conversations</div>
+								      return(<ConversationItem user={user} conversationId={conversationId} fetchMessages={fetchMessages} />)
+								}) 
+								: 
+							<div className='text-center text-lg font-semibold mt-24'>No Conversations</div>
 						}
 					</div>
 				</div> 
@@ -195,7 +188,7 @@ useEffect(() => {
             <div className='w-1/2 bg-white flex flex-col items-center h-screen'> 
             	{
 					messages?.receiver?.fullName &&
-					<div className='w-[75%] bg-secondary h-[80px] my-14 rounded-full flex items-center px-14 py-2'>
+						<div className='w-[75%] bg-secondary h-[80px] my-14 rounded-full flex items-center px-14 py-2'>
 						<div className='cursor-pointer'><img src={Avatar} width={60} height={60} className="rounded-full" /></div>
 						<div className='ml-6 mr-auto'>
 							<h3 className='text-lg'>{messages?.receiver?.fullName}</h3>

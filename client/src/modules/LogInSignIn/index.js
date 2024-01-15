@@ -31,21 +31,31 @@ const Form = ({
             body: JSON.stringify(data)
         })
 
-        if(!isSignInPage)
-        { 
-            navigate(`/users/sign_in}`)
-        }
-        if(res.status === 400) {
-            alert('Invalid credentials')
-        }else{
-            const resData = await res.json()
-            if(resData.token) {
-                localStorage.setItem('user:token', resData.token)
-                localStorage.setItem('user:detail', JSON.stringify(resData.user))
-                navigate('/')
-            }
-        }
+       
+    if (res.status === 400) 
+    {
+      alert("Invalid credentials");
+    } 
+    else if(res.status ===250)
+    {
+       alert("An email has been sent to your account,please verify your email");
+                
+    } 
+    else 
+    {
+      const resData = await res.json();
+      if(res.status===230)
+      {
+          alert("An email has been sent to your account,please verify your email");
+      }
+      else if (resData.token) 
+      {
+        localStorage.setItem("user:token", resData.token);
+        localStorage.setItem("user:detail", JSON.stringify(resData.user));
+        navigate("/");
+      }
     }
+}
 
   
   return (

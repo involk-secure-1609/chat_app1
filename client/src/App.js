@@ -1,6 +1,6 @@
 import './App.css';
-import Form from './modules/Form';
-import Dashboard from './modules/ChatScreen'
+import Form from './modules/LogInSignIn';
+import Dashboard from './modules/MainScreen';
 import { Routes, Route,Navigate } from 'react-router-dom';
 import VidScreen from './videoscreen';
 

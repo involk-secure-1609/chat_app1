@@ -1,8 +1,7 @@
 const express = require('express');
 const sendmessage=express.Router()
-const { Users } = require('../Models/Users');
-const { Conversations } = require('../Models/Conversations');
-const { Messages } = require('../Models/Messages');
+const Conversations = require('../Models/Conversations');
+const Messages = require('../Models/Messages');
 
 
 sendmessage.post('/api/message', async (req, res) => {

@@ -1,9 +1,9 @@
 const express = require('express');
 
 const getmessages=express.Router()
-const { Users } = require('../Models/Users');
-const { Conversations } = require('../Models/Conversations');
-const { Messages } = require('../Models/Messages');
+const Users = require('../Models/Users');
+const Conversations = require('../Models/Conversations');
+const Messages = require('../Models/Messages');
 
 
 getmessages.get('/api/message/:conversationId', async (req, res) => {

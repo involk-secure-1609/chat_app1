@@ -1,11 +1,9 @@
 const express = require('express');
 const bcryptjs = require('bcryptjs');
 const register=express.Router()
-const { Users } = require('../Models/Users');
-const { Conversations } = require('../Models/Conversations');
-const { Messages } = require('../Models/Messages');
-
-
+const Users = require('../Models/Users');
+const sendEmail = require('../EmailVerification/sendEmail');
+const url1="http://localhost:3000/"
 
 register.post('/api/register', async (req, res, next) => {
     try {
@@ -19,12 +17,17 @@ register.post('/api/register', async (req, res, next) => {
                 res.status(400).send('User already exists');
             } else {
                 const newUser = new Users({ fullName, email });
+                newUser.set('verified', false);
                 bcryptjs.hash(password, 10, (err, hashedPassword) => {
                     newUser.set('password', hashedPassword);
                     newUser.save();
                     next();
                 })
-                return res.status(200).send('User registered successfully');
+              
+		        const url = `${url1}users/${newUser.id}/verify/`;
+		        await sendEmail(newUser.email, "Verify Email", url);
+                res.status(250).send("An Email has been sent to your account,please verify");
+                console.log("email sent");
             }
         }
 
@@ -32,5 +35,6 @@ register.post('/api/register', async (req, res, next) => {
         console.log(error, 'Error')
     }
 })
+
 
 module.exports = { register };

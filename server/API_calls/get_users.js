@@ -1,8 +1,6 @@
 const express = require('express');
 const getusers=express.Router()
-const { Users } = require('../Models/Users');
-const { Conversations } = require('../Models/Conversations');
-const { Messages } = require('../Models/Messages');
+const Users = require('../Models/Users');
 
 
 getusers.get('/api/users/:userId', async (req, res) => {

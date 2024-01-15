@@ -1,4 +1,3 @@
-import React from "react";
 const UseSendMessage = async ({ socket, user, messages, message }) => {
   try {
     // Emit message through socket

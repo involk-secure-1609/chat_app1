@@ -2,11 +2,6 @@ const express = require('express');
 
 const createconversation=express.Router()
 const  Conversations  = require('../Models/Conversations');
-
-
-
-
-
 createconversation.post('/api/conversation', async (req, res) => {
     try {
         const { senderId, receiverId } = req.body;

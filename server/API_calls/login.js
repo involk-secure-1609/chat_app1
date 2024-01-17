@@ -1,7 +1,8 @@
 const bcryptjs = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const express = require("express");
-const sendEmail = require("../EmailVerification/sendEmail");
+import EmailSender from '../EmailVerification/sendEmail';
+const emailSender = new EmailSender();
 
 const Users = require("../Models/Users");
 
@@ -31,7 +32,7 @@ login.post("/api/login", async (req, res, next) => {
         else if (!user.verified) 
         {
             const url = `${process.env.BASE_URL}users/${user.id}/verify/`;
-            await sendEmail(user.email, "Verify Email", url);
+            await emailSender.sendEmail(user.email, "Verify Email", url);
             res.status(230).send( "An Email sent to your account please verify" );
             console.log("Email sent ");
         }

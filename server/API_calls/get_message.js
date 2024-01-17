@@ -5,7 +5,6 @@ const Users = require('../Models/Users');
 const Conversations = require('../Models/Conversations');
 const Messages = require('../Models/Messages');
 
-
 getmessages.get('/api/message/:conversationId', async (req, res) => {
     try {
         const checkMessages = async (conversationId) => {

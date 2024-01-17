@@ -99,68 +99,181 @@ const VidScreen=()=> {
 		setCallEnded(true)
 		connectionRef.current.destroy()
 	}
+return (
+    <>
+      <div className="bg-black min-h-screen flex justify-center items-center">
+        <div className="container mx-auto p-4 flex space-x-4">
+          <div className="w-1/2">
+            <div className="video-container">
+              <div className="video">
+                {stream && (
+                  <video
+                    playsInline
+                    muted
+                    ref={myVideo}
+                    autoPlay
+                    className="w-full h-full"
+                  />
+                )}
+              </div>
+            </div>
+          </div>
+          <div className="w-1/2">
+            <div className="video-container">
+              <div className="video">
+                {callAccepted && !callEnded ? (
+                  <video
+                    playsInline
+                    ref={userVideo}
+                    autoPlay
+                    className="w-full h-full"
+                  />
+                ) : null}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="container mx-auto p-4">
+          <TextField
+            id="filled-basic"
+            label="Name"
+            variant="filled"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            className="mb-4 text-white"
+          />
+          <CopyToClipboard text={me} className="mb-4">
+            <Button
+              variant="contained"
+              color="primary"
+              startIcon={<PhoneIcon fontSize="large" />}
+            >
+              Copy ID
+            </Button>
+          </CopyToClipboard>
 
-	return (
-		<>
-		<div className="container">
-			<div className="video-container">
-				<div className="video">
-					{stream &&  <video playsInline muted ref={myVideo} autoPlay style={{ width: "500px" }} />}
-				</div>
-				<div className="video">
-					{callAccepted && !callEnded ?
-					<video playsInline ref={userVideo} autoPlay style={{ width: "500px"}} />:
-					null}
-				</div>
-			</div>
-			<div className="myId">
-				<TextField
-					id="filled-basic"
-					label="Name"
-					variant="filled"
-					value={name}
-					onChange={(e) => setName(e.target.value)}
-					style={{ marginBottom: "20px" }}
-				/>
-				<CopyToClipboard text={me} style={{ marginBottom: "2rem" }}>
-					<Button variant="contained" color="primary" startIcon={<PhoneIcon fontSize="large" />}>
-						Copy ID
-					</Button>
-				</CopyToClipboard>
+          <TextField
+            id="filled-basic"
+            label="ID to call"
+            variant="filled"
+            value={idToCall}
+            onChange={(e) => setIdToCall(e.target.value)}
+            className="mb-4 text-white"
+          />
+          <div className="call-button">
+            {callAccepted && !callEnded ? (
+              <Button
+                variant="contained"
+                color="secondary"
+                onClick={leaveCall}
+              >
+                End Call
+              </Button>
+            ) : (
+              <IconButton
+                color="primary"
+                aria-label="call"
+                onClick={() => callUser(idToCall)}
+              >
+                <PhoneIcon fontSize="large" />
+              </IconButton>
+            )}
+            <span className="text-white">{idToCall}</span>
+          </div>
+        </div>
+        <div className="container mx-auto p-4">
+          {receivingCall && !callAccepted ? (
+            <div className="caller text-white">
+              <h1>{name} is calling...</h1>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={answerCall}
+              >
+                Answer
+              </Button>
+            </div>
+          ) : null}
+        </div>
+      </div>
+    </>
+  );
 
-				<TextField
-					id="filled-basic"
-					label="ID to call"
-					variant="filled"
-					value={idToCall}
-					onChange={(e) => setIdToCall(e.target.value)}
-				/>
-				<div className="call-button">
-					{callAccepted && !callEnded ? (
-						<Button variant="contained" color="secondary" onClick={leaveCall}>
-							End Call
-						</Button>
-					) : (
-						<IconButton color="primary" aria-label="call" onClick={() => callUser(idToCall)}>
-							<PhoneIcon fontSize="large" />
-						</IconButton>
-					)}
-					{idToCall}
-				</div>
-			</div>
-			<div>
-				{receivingCall && !callAccepted ? (
-						<div className="caller">
-						<h1 >{name} is calling...</h1>
-						<Button variant="contained" color="primary" onClick={answerCall}>
-							Answer
-						</Button>
-					</div>
-				) : null}
-			</div>
-		</div>
-		</>
-	)
 }
 
 export default VidScreen
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// return (
+	// 	<>
+	// 	<div className="container">
+	// 		<div className="video-container">
+	// 			<div className="video">
+	// 				{stream &&  <video playsInline muted ref={myVideo} autoPlay style={{ width: "500px" }} />}
+	// 			</div>
+	// 			<div className="video">
+	// 				{callAccepted && !callEnded ?
+	// 				<video playsInline ref={userVideo} autoPlay style={{ width: "500px"}} />:
+	// 				null}
+	// 			</div>
+	// 		</div>
+	// 		<div className="myId">
+	// 			<TextField
+	// 				id="filled-basic"
+	// 				label="Name"
+	// 				variant="filled"
+	// 				value={name}
+	// 				onChange={(e) => setName(e.target.value)}
+	// 				style={{ marginBottom: "20px" }}
+	// 			/>
+	// 			<CopyToClipboard text={me} style={{ marginBottom: "2rem" }}>
+	// 				<Button variant="contained" color="primary" startIcon={<PhoneIcon fontSize="large" />}>
+	// 					Copy ID
+	// 				</Button>
+	// 			</CopyToClipboard>
+
+	// 			<TextField
+	// 				id="filled-basic"
+	// 				label="ID to call"
+	// 				variant="filled"
+	// 				value={idToCall}
+	// 				onChange={(e) => setIdToCall(e.target.value)}
+	// 			/>
+	// 			<div className="call-button">
+	// 				{callAccepted && !callEnded ? (
+	// 					<Button variant="contained" color="secondary" onClick={leaveCall}>
+	// 						End Call
+	// 					</Button>
+	// 				) : (
+	// 					<IconButton color="primary" aria-label="call" onClick={() => callUser(idToCall)}>
+	// 						<PhoneIcon fontSize="large" />
+	// 					</IconButton>
+	// 				)}
+	// 				{idToCall}
+	// 			</div>
+	// 		</div>
+	// 		<div>
+	// 			{receivingCall && !callAccepted ? (
+	// 					<div className="caller">
+	// 					<h1 >{name} is calling...</h1>
+	// 					<Button variant="contained" color="primary" onClick={answerCall}>
+	// 						Answer
+	// 					</Button>
+	// 				</div>
+	// 			) : null}
+	// 		</div>
+	// 	</div>
+	// 	</>
+	// )

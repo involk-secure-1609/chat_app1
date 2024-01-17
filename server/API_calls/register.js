@@ -2,15 +2,16 @@ const express = require('express');
 const bcryptjs = require('bcryptjs');
 const register=express.Router()
 const Users = require('../Models/Users');
-const sendEmail = require('../EmailVerification/sendEmail');
 const url1="http://localhost:3000/"
+import EmailSender from '../EmailVerification/sendEmail';
+const emailSender = new EmailSender();
 
 register.post('/api/register', async (req, res, next) => {
     try {
         const { fullName, email, password } = req.body;
 
         if (!fullName || !email || !password) {
-            res.status(400).send('Please fill all required fields');
+            res.status(410).send('Please fill all required fields');
         } else {
             const isAlreadyExist = await Users.findOne({ email });
             if (isAlreadyExist) {
@@ -25,7 +26,7 @@ register.post('/api/register', async (req, res, next) => {
                 })
               
 		        const url = `${url1}users/${newUser.id}/verify/`;
-		        await sendEmail(newUser.email, "Verify Email", url);
+		        await emailSender.sendEmail(newUser.email, "Verify Email", url);
                 res.status(250).send("An Email has been sent to your account,please verify");
                 console.log("email sent");
             }

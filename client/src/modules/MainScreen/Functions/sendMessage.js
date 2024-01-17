@@ -15,7 +15,7 @@ const UseSendMessage = async ({ socket, user, messages, message }) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        conversationId: messages?.conversationId,
+        conversationId: messages?.conversationId !== null ? messages?.conversationId : 'new',
         senderId: user?.id,
         message,
         receiverId: messages?.receiver?.receiverId,

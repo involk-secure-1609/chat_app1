@@ -106,8 +106,7 @@ describe('API test for Creating New Account', () => {
     senderId: id1,
     conversationId: convo._id,
     message: mockRequest.message,
-  },
-  );
+  },);
   expect(msgExists).toBe(true);
   });
 });

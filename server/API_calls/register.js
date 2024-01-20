@@ -11,14 +11,14 @@ register.post("/api/register", async (req, res, next) => {
     const { fullName, email, password } = req.body;
 
     if (!fullName || !email || !password) {
-      res.status(410).send("Please fill all required fields");
+      res.status(400).json({msg:"Please fill all required fields"});
     } else {
-      const isAlreadyExist = await Users.findOne({ email });
+      const isAlreadyExist = await Users.findOne({ email:email });
       if (isAlreadyExist) {
-        res.status(400).send("User already exists");
+        res.status(400).json({msg:"User already exists"});
       } else {
         const newUser = new Users({ fullName, email });
-        newUser.set("verified", true);
+        newUser.set("verified", false);
         bcryptjs.hash(password, 10, (err, hashedPassword) => {
           newUser.set("password", hashedPassword);
           newUser.save();
@@ -26,11 +26,8 @@ register.post("/api/register", async (req, res, next) => {
         });
 
         const url = `${url1}users/${newUser.id}/verify/`;
-        await emailSender.sendEmail(newUser.email, "Verify Email", url);
-        res
-          .status(250)
-          .send("An Email has been sent to your account,please verify");
-        console.log("email sent");
+        res.status(200).json({msg:"An Email has been sent to your account,please verify",loggedIn:false});console.log("email sent");
+        await emailSender.sendEmail(newUser.email, "Verify Email", `Click on this ${url} to verify your email`);
       }
     }
   } catch (error) {

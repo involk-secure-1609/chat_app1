@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "vitest",
     "dev1": "nodemon app.js ",
     "dev2": "nodemon server.js"
   },
@@ -22,7 +22,7 @@
     "nodemon": "^3.0.2",
     "socket.io": "^4.7.2",
     "socket.io-client": "^4.7.4",
-    "vitest": "^1.2.0"
+    "vitest": "^1.2.1"
   },
   "devDependencies": {
     "jest": "^29.7.0",

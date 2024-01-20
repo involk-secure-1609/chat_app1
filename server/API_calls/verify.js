@@ -4,6 +4,7 @@ const Users = require("../Models/Users");
 
 verify.get("/api/users/:id/verify/", async (req, res) => {
   try {
+    console.log(req.params.id);
     const user = await Users.findOne({ _id: req.params.id });
     if (!user) return res.status(400).send({ message: "Invalid link" });
 
@@ -18,3 +19,4 @@ verify.get("/api/users/:id/verify/", async (req, res) => {
 });
 
 module.exports = { verify };
+

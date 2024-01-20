@@ -12,7 +12,7 @@ checkConversation.post("/api/conversations/check", async (req, res) => {
     // console.log(existingConversation);
     if (existingConversation) {
       console.log("yes");
-      return res.status(200).json({ check: "false" });
+      return res.status(400).json({ check: "false" });
     } else if (!existingConversation) {
       console.log("no");
       return res.status(200).json({ check: "true" });

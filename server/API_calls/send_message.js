@@ -7,27 +7,27 @@ sendmessage.post("/api/message", async (req, res) => {
   try {
     const { conversationId, senderId, message, receiverId = "" } = req.body;
     if (!senderId || !message)
-      return res.status(400).send("Please fill all required fields");
+      return res.status(400).json({msg:"Please fill all required fields"});
     // console.log(senderId);console.log(receiverId);
     const conversations = await Conversations.find({
       members: { $all: [senderId, receiverId] },
     });
-    console.log(conversations.length);
+    // console.log(conversations.length);
     const existingConversation = await Conversations.findOne({
       members: { $all: [senderId, receiverId] },
     });
-    console.log(conversationId);
+    // console.log(conversationId);
     if (existingConversation) {
       console.log(existingConversation._id);
       // conversationId=existingConversation._id;
     }
-    console.log(conversations.length);
+    // console.log(conversations.length);
     if (conversationId === "new" && receiverId && !existingConversation) {
       const newCoversation = new Conversations({
         members: [senderId, receiverId],
       });
       await newCoversation.save();
-      console.log(newCoversation._id);
+      // console.log(newCoversation._id);
       const newMessage = new Messages({
         conversationId: newCoversation._id,
         senderId,

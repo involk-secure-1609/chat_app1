@@ -6,7 +6,7 @@ const conversationSchema = mongoose.Schema({
         required: true,
     }
 });
-
-const Conversation = mongoose.model('Conversation', conversationSchema);
+mongoosemodels={}
+const Conversation = mongoose.models.Conversation || mongoose.model('Conversation', conversationSchema);
 
 module.exports = Conversation;

@@ -7,9 +7,12 @@ const { register } = require('./API_calls/register');
 const { sendmessage } = require('./API_calls/send_message');
 const {verify } = require('./API_calls/verify');
 const { createconversation } = require('./API_calls/create_conversation');
+const {checkConversation } = require('./API_calls/checkConversation');
 const addUserHandler = require('./SocketEvents/addUser');
 const sendMessageHandler = require('./SocketEvents/sendMessage');
 const disconnectHandler = require('./SocketEvents/disconnect');
+const getconversationHandler = require('./SocketEvents/get_conversations');
+
 const cors = require('cors');
 const io = require('socket.io')(8080, {
     cors: {
@@ -30,6 +33,7 @@ app.use(getconversation);
 app.use(getmessages);
 app.use(getusers);
 app.use(createconversation);
+app.use(checkConversation);
 app.use(login);
 app.use(register);
 app.use(sendmessage);
@@ -47,6 +51,7 @@ io.on('connection', socket => {
     addUserHandler(socket, io, users);
     sendMessageHandler(socket, io, users);
     disconnectHandler(socket, io, users);
+    getconversationHandler(socket, io, users);
     // io.emit('getUsers', socket.userId);
 });
 

@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "vitest",
     "dev1": "nodemon app.js ",
     "dev2": "nodemon server.js"
   },
@@ -14,12 +14,19 @@
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
+    "dotenv": "^16.3.2",
     "express": "^4.18.2",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.0.3",
+    "nanoid": "^5.0.4",
     "nodemailer": "^6.9.8",
     "nodemon": "^3.0.2",
     "socket.io": "^4.7.2",
-    "socket.io-client": "^4.7.4"
+    "socket.io-client": "^4.7.4",
+    "vitest": "^1.2.1"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "supertest": "^6.3.4"
   }
 }

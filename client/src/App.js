@@ -3,7 +3,7 @@ import Form from './modules/LogInSignIn';
 import Dashboard from './modules/MainScreen';
 import { Routes, Route,Navigate } from 'react-router-dom';
 import VidScreen from './videoscreen';
-
+import EmailVerify from './modules/LogInSignIn/EmailVerification';
 const ProtectedRoute = ({ children,auth=false }) => {
   const isLoggedIn = localStorage.getItem('user:token') !== null || false;
 
@@ -38,6 +38,11 @@ function App() {
         <Route path='/video_call' element={
         <ProtectedRoute>
         <VidScreen/>
+      </ProtectedRoute>
+      } />
+      <Route path='/users/:id/verify/' element={
+        <ProtectedRoute>
+        <EmailVerify/>
       </ProtectedRoute>
       } />
     </Routes>

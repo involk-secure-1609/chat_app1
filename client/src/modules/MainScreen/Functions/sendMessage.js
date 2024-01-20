@@ -1,6 +1,6 @@
 const UseSendMessage = async ({ socket, user, messages, message }) => {
   try {
-    // Emit message through socket
+    // console.log(senderId,receiverId);
     socket?.emit('sendMessage', {
       senderId: user?.id,
       receiverId: messages?.receiver?.receiverId,
@@ -8,8 +8,7 @@ const UseSendMessage = async ({ socket, user, messages, message }) => {
       conversationId: messages?.conversationId,
     });
 
-    // Send message through API
-    const res = await fetch(`http://localhost:8000/api/message`, {
+     const res1 = await fetch(`http://localhost:8000/api/conversations/check`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -21,8 +20,32 @@ const UseSendMessage = async ({ socket, user, messages, message }) => {
         receiverId: messages?.receiver?.receiverId,
       }),
     });
+    const resData=await res1.json();
+    const isNew=resData.check;
+      // Send message through API
+    const res = await fetch(`http://localhost:8000/api/message`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        conversationId: messages?.conversationId,
+        senderId: user?.id,
+        message,
+        receiverId: messages?.receiver?.receiverId,
+      }),
+    });   
+      // if (isNew==='true') {
+        socket?.emit('getConvo', {
+          senderId: user?.id,
+          receiverId: messages?.receiver?.receiverId,
+          message,
+          isNew:isNew,
+        });
+      // }
+    // }, 4000);
+  // } 
 
-    // Handle response if needed
   } catch (error) {
     console.error('Error sending message:', error);
   }

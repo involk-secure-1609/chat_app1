@@ -11,12 +11,18 @@ Apart from this i have also hosted the app using DOCKER and have also written te
 
 The required skills necessary are:
 
-1.NODEJS
+1.NODEJS 
+
 2.EXPRESSJS
+
 3.TAILWIND CSS
+
 4.MONGO-DB
+
 5.REACT-JS
+
 6.SOCKET.IO
+
 7.WEBRTC
 
 ### Installing

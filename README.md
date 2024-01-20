@@ -5,7 +5,7 @@ It allows you to search for any user who is using the app and then you can choos
 There are still a few errors currently with the WebRTC part, mainly when the video call ends but i will fix it soon.
 The app also verifies your email using NodeMailer.
 
-Apart from this i have also hosted the app using DOCKER and have also written tests for my API calls in my server.
+Apart from this i have also hosted the app using DOCKER and have also written tests for my API calls in my server using VITEST.
 
 ### Prerequisites
 
@@ -24,6 +24,8 @@ The required skills necessary are:
 6.SOCKET.IO
 
 7.WEBRTC
+
+8.VITEST
 
 ### Installing
 

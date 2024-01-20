@@ -1,3 +1,4 @@
+require('dotenv').config();
 const bcryptjs = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const express = require("express");
@@ -5,7 +6,6 @@ const EmailSender = require("../EmailVerification/sendEmail");
 const emailSender = new EmailSender();
 const url1 = "http://localhost:3000/";
 const Users = require("../Models/Users");
-
 const login = express.Router();
 
 login.post("/api/login", async (req, res, next) => {

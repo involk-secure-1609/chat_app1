@@ -1,5 +1,8 @@
 const nodemailer = require("nodemailer");
+require('dotenv').config();
 
+const userEmail=process.env.EmailAuthUser;
+const userPassword=process.env.EmailAuthPassword;
 class EmailSender {
   constructor() {
     this.transporter = nodemailer.createTransport({
@@ -10,8 +13,8 @@ class EmailSender {
       debug: true,
       secureConnection: false,
       auth: {
-        user: "kevintj916@gmail.com",
-        pass: "oyrc dfsh mcsy akzn",
+        user: userEmail,
+        pass: userPassword,
       },
     });
   }
@@ -19,7 +22,7 @@ class EmailSender {
   async sendEmail(email, subject, text) {
     try {
       await this.transporter.sendMail({
-        from: "kevintj916@gmail.com",
+        from: userEmail,
         to: email,
         subject: subject,
         text: text,

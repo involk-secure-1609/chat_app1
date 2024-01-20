@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
+require('dotenv').config();
 
-const DatabaseUrl="mongodb+srv://chat_app_admin:volkat916@cluclucluster.vcca557.mongodb.net/?retryWrites=true&w=majority";
+const DatabaseUrl=process.env.DatabaseUrl;
 async function createMongoInstance() {
     const dbName = 'CHAT_APP_TEST_DATABASE';
     return mongoose.connect(DatabaseUrl, {

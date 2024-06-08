@@ -30,7 +30,7 @@ const Form = ({ isSignInPage = true }) => {
     const resData = await res.json();
     if (res.status === 400) {
       alert(`${resData.msg}`);
-    } else if (res.status === 200 && resData.loggedIn == false) {
+    } else if (res.status === 200 && resData.loggedIn === false) {
       alert(`${resData.msg}`);
     } else if (resData.token) {
       alert("Login successful")

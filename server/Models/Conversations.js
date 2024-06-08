@@ -6,6 +6,7 @@ const conversationSchema = mongoose.Schema({
         required: true,
     }
 });
+
 mongoosemodels={}
 const Conversation = mongoose.models.Conversation || mongoose.model('Conversation', conversationSchema);
 

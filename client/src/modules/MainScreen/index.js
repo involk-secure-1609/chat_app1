@@ -36,7 +36,7 @@ const Dashboard = () => {
   const filteredUsers = users.filter(({ user }) =>
     user?.fullName.toLowerCase().includes(searchTerm.toLowerCase())
   );
-  const linkToOpen = "/video_call";
+  const linkToOpen = "/lobby"+"/"+user?.fullName;
   //   const { messages, fetchMessages } = useFetchMessages(user);
 
   useEffect(() => {
@@ -65,7 +65,7 @@ const Dashboard = () => {
       const receiver = data.receiver1;
       const sender = data.sender1;
       const convoId = data.convoId;
-      if (user && user.id === receiver._id && isIt == true) {
+      if (user && user.id === receiver._id && isIt === true) {
         setConversations((prev) => [
           ...prev,
           {
@@ -74,7 +74,7 @@ const Dashboard = () => {
           },
         ]);
         console.log("receiver added to conversation");
-      } else if (user && user.id === sender._id && isIt == true) {
+      } else if (user && user.id === sender._id && isIt === true) {
         setConversations((prev) => [
           ...prev,
           {
@@ -86,7 +86,7 @@ const Dashboard = () => {
       }
     });
 
-  }, [socket]);
+  }, [socket,user]);
 
   // If the state of messages changes then we scroll into view to see the latest message
   useEffect(() => {
@@ -141,7 +141,7 @@ const Dashboard = () => {
       setUsers(resData);
     };
     fetchUsers();
-  }, []);
+  }, [user?.id]);
 
   // logs out user by clearing the token stored in the local storage
   const LogoutUser = () => {

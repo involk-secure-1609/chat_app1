@@ -27,6 +27,8 @@ The required skills necessary are:
 - [REDIS](https://redis.io/)
 
 # Design Of The Pages
+
+**My Project Screenshot:**
 ![Screenshot from 2024-06-26 19-04-57](https://github.com/involk-secure-1609/chat_app1/assets/133996079/2e507f3d-eb4b-4271-a358-fcb081701718)
 
 

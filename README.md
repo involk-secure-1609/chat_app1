@@ -12,22 +12,22 @@ The required skills necessary are:
 
 - [NODEJS](https://nodejs.org/en) :
   Node.js is used for backend development to create server-side applications, APIs, and web services.
-- [EXPRESSJS](https://expressjs.com/)
+- [EXPRESSJS](https://expressjs.com/):
   Express.js is a Node.js framework designed for building web applications and APIs.
-- [TAILWIND CSS](https://tailwindcss.com/)
+- [TAILWIND CSS](https://tailwindcss.com/):
   A frontend framework which is used to design the UI of the application.
-- [MONGO-DB](https://www.mongodb.com/)
+- [MONGO-DB](https://www.mongodb.com/):
   A NoSql database used for the storage of messages,chats and User Information.
-- [REACT-JS](https://react.dev/)
+- [REACT-JS](https://react.dev/):
   React.js is used for building interactive user interfaces in web applications.
-- [SOCKET.IO](https://socket.io/)
+- [SOCKET.IO](https://socket.io/):
   Enables real-time, bidirectional, and event-based communication between web clients and servers.
-- [WEBRTC](https://webrtc.org/)
+- [WEBRTC](https://webrtc.org/):
    WebRTC is designed to enable peer-to-peer communication and is widely used in applications for video conferencing, voice calls, and file sharing.
-- [REDIS](https://redis.io/)
+- [REDIS](https://redis.io/):
   Redis is an in-memory data structure store that can be used as a database, cache, and message broker. It is known for its high performance, flexibility and is used to cache SocketIds
   in our application.
-- [Docker](https://www.docker.com/)
+- [Docker](https://www.docker.com/):
   Docker is a platform and tool designed to simplify the process of creating, deploying, and managing applications using containerization technology. 
 
 # Design Of The Pages

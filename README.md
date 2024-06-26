@@ -27,7 +27,8 @@ The required skills necessary are:
 - [REDIS](https://redis.io/)
   Redis is an in-memory data structure store that can be used as a database, cache, and message broker. It is known for its high performance, flexibility and is used to cache SocketIds
   in our application.
-- [Docker]()
+- [Docker](https://www.docker.com/)
+  Docker is a platform and tool designed to simplify the process of creating, deploying, and managing applications using containerization technology. 
 
 # Design Of The Pages
 

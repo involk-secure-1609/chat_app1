@@ -1,10 +1,10 @@
 # CHAT_APP
 
-This is just a standard Chat App I created so that i could learn how socket.io and WebRTC work.
+This is just a standard Chat App I created so that i could learn how __Socket.io and WebRTC__ work.
 It allows you to search for any user who is using the app and then you can choose to communicate with them.
-The app also verifies your email using NodeMailer.
+The app also verifies your email using __NodeMailer__.
 
-Apart from this I have also hosted the app using DOCKER and have also used Redis for caching Sockets which helps in improving the latency of the application.
+Apart from this I have also hosted the app using __DOCKER__ and have also used __Redis for caching SocketIds__ which helps in improving the latency of the application.
 
 # Tech-Stack Used
 

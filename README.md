@@ -2,71 +2,31 @@
 
 This is just a standard Chat App I created so that i could learn how socket.io and WebRTC work.
 It allows you to search for any user who is using the app and then you can choose to communicate with them.
-There are still a few errors currently with the WebRTC part, mainly when the video call ends but i will fix it soon.
 The app also verifies your email using NodeMailer.
 
-Apart from this i have also hosted the app using DOCKER and have also written tests for my API calls in my server using VITEST.
+Apart from this i have also hosted the app using DOCKER and have also used Redis for caching Sockets which helps in improving the latency of the application.
 
-### Prerequisites
+# Tech-Stack Used
 
 The required skills necessary are:
 
-1.NODEJS 
+- [NODEJS](https://nodejs.org/en) 
 
-2.EXPRESSJS
+- [EXPRESSJS](https://expressjs.com/)
 
-3.TAILWIND CSS
+- [TAILWIND CSS](https://tailwindcss.com/)
 
-4.MONGO-DB
+- [MONGO-DB](https://www.mongodb.com/)
 
-5.REACT-JS
+- [REACT-JS](https://react.dev/)
 
-6.SOCKET.IO
+- [SOCKET.IO](https://socket.io/)
 
-7.WEBRTC
+- [WEBRTC](https://webrtc.org/)
 
-8.VITEST
+- [REDIS](https://redis.io/)
 
-### Installing
-
-A step by step series of examples that tell you how to get a development env running
-
-Say what the step will be
-
-```
-Give the example
-```
-
-And repeat
-
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo
-
-## Running the tests
-
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-## Deployment
-
-Add additional notes about how to deploy this on a live system
+# Design Of The Pages
+![Screenshot from 2024-06-26 19-04-57](https://github.com/involk-secure-1609/chat_app1/assets/133996079/2e507f3d-eb4b-4271-a358-fcb081701718)
 
 

@@ -41,8 +41,11 @@ The required skills necessary are:
 **Chat Page:**
 ![Screenshot from 2024-06-26 19-13-26](https://github.com/involk-secure-1609/chat_app1/assets/133996079/fd65bdb9-c52d-4a1b-a0ae-60c9ce64a42d)
 
-**Video Calling Page:**
+**Video Calling Entry Page:**
 ![Screenshot from 2024-06-26 19-16-54](https://github.com/involk-secure-1609/chat_app1/assets/133996079/9790716e-9d36-4121-980d-e6767a2cf867)
+
+**Video Calling Page:**
+![Screenshot from 2024-07-01 04-52-43](https://github.com/involk-secure-1609/chat_app1/assets/133996079/6875df8f-25ed-4939-a478-65c94c6a6c80)
 
 
 # Key Features
@@ -58,3 +61,6 @@ The required skills necessary are:
 - After clicking the call icon a __new Video Calling Page__ will open:
 ![Screenshot from 2024-06-26 19-16-54](https://github.com/involk-secure-1609/chat_app1/assets/133996079/4ed31002-7279-4531-abae-6e65550e6d59)
 - In this page we can __generate a Room Id__ which has to be then forwarded to the user we want to talk to.
+- After the user uses the RoomId to join the room we can finally start chatting:
+  ![Screenshot from 2024-07-01 04-52-43](https://github.com/involk-secure-1609/chat_app1/assets/133996079/87334622-9e39-4778-bceb-b05eccb9ceb7)
+

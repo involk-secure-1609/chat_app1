@@ -1,5 +1,5 @@
 import React from 'react';
-import Input from "../../../components/Input/input";
+import Input from "../../../common_components/Input/input";
 
 const MessageForm = ({ sendMessage,message,setMessage }) => {
   return (

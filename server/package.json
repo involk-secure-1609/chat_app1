@@ -6,7 +6,7 @@
   "scripts": {
     "test": "vitest",
     "dev1": "nodemon app.js ",
-    "dev2": "nodemon server.js"
+    "dev2": "nodemon video_call.js"
   },
   "keywords": [],
   "author": "",

@@ -1,4 +1,5 @@
 const express =require('express');
+const { createClient } =require('redis');
 const { getmessages } = require('./API_calls/get_message');
 const { getconversation } = require('./API_calls/get_conversations');
 const { getusers } = require('./API_calls/get_users');
@@ -24,7 +25,7 @@ const app= express();
 // Connect DB
 require('./db/connection');``
 
-
+// API-CALLS
 const port=process.env.PORT || 8000
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -44,14 +45,29 @@ app.get('/', (req, res) => {
     res.end
 })
 
+// REDIS
+const client = createClient({
+    password: 'rPeQ7RGBCTCAeRSrYGrPME4dT0BLJXU2',
+    socket: {
+        host: 'redis-11756.c232.us-east-1-2.ec2.redns.redis-cloud.com',
+        port: 11756
+    }
+});
+client.connect();
+
+
+client.on('connect',function(){
+    console.log('Connected');
+})
 // Socket.io
-let users = [];
+// let users = [];
+// let currentUser="";
 io.on('connection', socket => {
 
-    addUserHandler(socket, io, users);
-    sendMessageHandler(socket, io, users);
-    disconnectHandler(socket, io, users);
-    getconversationHandler(socket, io, users);
+    addUserHandler(socket, io);
+    sendMessageHandler(socket, io);
+    disconnectHandler(socket, io);
+    getconversationHandler(socket, io);
     // io.emit('getUsers', socket.userId);
 });
 

@@ -1,6 +1,8 @@
 const UseSendMessage = async ({ socket, user, messages, message }) => {
   try {
     // console.log(senderId,receiverId);
+    // socket?.emit('')
+    // await socket?.emit("addUser", user?.id);
     socket?.emit('sendMessage', {
       senderId: user?.id,
       receiverId: messages?.receiver?.receiverId,

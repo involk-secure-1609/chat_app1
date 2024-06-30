@@ -146,7 +146,7 @@ const Dashboard = () => {
   // logs out user by clearing the token stored in the local storage
   const LogoutUser = () => {
     console.log("Logged out user");
-    // socket?.emit('disconnecting', user?.id);
+    // socket?.emit('disconnect', user?.id);
     setToken("");
     navigate("/users/sign_in");
     return localStorage.removeItem("user:token");

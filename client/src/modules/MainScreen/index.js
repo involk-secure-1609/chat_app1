@@ -2,6 +2,7 @@ import React from "react";
 import { useEffect, useRef, useState } from "react";
 import { io } from "socket.io-client";
 import { useNavigate } from "react-router-dom";
+import {load} from '@tensorflow-models/toxicity';
 import UserProfile from "./ChatNames/userprofile";
 import ConversationItem from "./ChatNames/chatprofile";
 import MessageHeader from "./MessageComps/MessageHeader";
@@ -26,6 +27,7 @@ const Dashboard = () => {
   // Initalizes socket.io
   const [socket, setSocket] = useState(null);
   const messageRef = useRef(null);
+  const model=useRef(null);
   // for Navigation
   const navigate = useNavigate();
   // checks to see if user is already logged in
@@ -42,6 +44,16 @@ const Dashboard = () => {
   useEffect(() => {
     setSocket(io("http://localhost:8080"));
   }, []);
+
+  useEffect(() => {
+    async function loadModel(){
+      const threshold=0.8;
+    model.current=await load(threshold);
+    console.log("Models loaded");
+    }
+    loadModel();
+    
+  },[]);
 
   useEffect(() => {
 	
@@ -153,7 +165,9 @@ const Dashboard = () => {
   };
 
   const sendMessage = () => {
+
     UseSendMessage({
+      model:model,
       socket: socket,
       user: user,
       messages: messages,

@@ -1,8 +1,17 @@
-const UseSendMessage = async ({ socket, user, messages, message }) => {
+const UseSendMessage = async ({ socket, user, messages, message,model }) => {
   try {
     // console.log(senderId,receiverId);
     // socket?.emit('')
     // await socket?.emit("addUser", user?.id);
+
+    const predictions=await model.current.classify([message]);
+    console.log(predictions);
+
+    const isToxic=predictions[6].results[0].match;
+    console.log(isToxic);
+
+    if(isToxic==false || !isToxic)
+    {
     socket?.emit('sendMessage', {
       senderId: user?.id,
       receiverId: messages?.receiver?.receiverId,
@@ -46,8 +55,8 @@ const UseSendMessage = async ({ socket, user, messages, message }) => {
         });
       // }
     // }, 4000);
-  // } 
-
+  } 
+  
   } catch (error) {
     console.error('Error sending message:', error);
   }
